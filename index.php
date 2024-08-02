@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <?php
 $db = mysqli_connect("localhost", "root", "", "to_do_list");
 
@@ -18,17 +27,6 @@ if (isset($_GET['del_task'])) {
 
 ?>
 
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
 <body>
     <div id="myDIV" class="header">
         <h2>My To Do List</h2>
@@ -43,10 +41,10 @@ if (isset($_GET['del_task'])) {
         <?php while ($row = mysqli_fetch_array($tasks)) {  ?>
             <li> <?php echo $row['Id']; ?></li>
             <li><?php echo $row['task']; ?></li>
-
+            <li><a href="index.php?del_task=<?php echo $row['Id']; ?>">X</li>
         <?php } ?>
     </ul>
-    <script src="script.js"></script>
+
 </body>
 
 </html>
