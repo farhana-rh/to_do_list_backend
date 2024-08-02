@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
         <form action="index.php" method="POST">
             <input type="text" id="myInput" name="task" placeholder="Title...">
 
-            <button onclick="newElement()" type="submit" name="submit" class="addBtn"> ADD</button>
+            <button type="submit" name="submit" class="addBtn"> ADD</button>
         </form>
     </div>
 
