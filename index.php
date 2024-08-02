@@ -13,7 +13,8 @@
         <h2>My To Do List</h2>
         <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])  ?>" method="POST">
             <input type="text" id="myInput" name="task" placeholder="Title...">
-            <span onclick="newElement()" class="addBtn">Add</span>
+
+            <button onclick="newElement()" type="submit" name="add" class="addBtn"> ADD</button>
         </form>
     </div>
 
@@ -29,8 +30,23 @@
 
 
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $task = filter_input(INPUT_POST, "task", FILTER_SANITIZE_SPECIAL_CHARS);
+include('database.php');
+
+
+echo "db is connected" . "<br>";
+
+
+
+if (isset($_POST['add'])) {
+    if ($_POST['task'] != "") {
+        $task = $_POST['task'];
+        $sql = "INSERT INTO tasks (task) VALUES ('$task')";
+        mysqli_query($conn, $sql);
+        echo "task added";
+    } else {
+        echo "something wrong, task is not adding";
+    }
 }
 
+mysqli_close($conn);
 ?>
