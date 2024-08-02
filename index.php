@@ -1,3 +1,16 @@
+<?php
+$db = mysqli_connect("localhost", "root", "", "to_do_list");
+
+if (isset($_POST['submit'])) {
+    $task = $_POST['task'];
+    mysqli_query($db, "INSERT INTO tasks (task) VALUES ('$task')");
+    header('location:index.php');
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,10 +24,10 @@
 <body>
     <div id="myDIV" class="header">
         <h2>My To Do List</h2>
-        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"])  ?>" method="POST">
+        <form action="index.php" method="POST">
             <input type="text" id="myInput" name="task" placeholder="Title...">
 
-            <button onclick="newElement()" type="submit" name="add" class="addBtn"> ADD</button>
+            <button onclick="newElement()" type="submit" name="submit" class="addBtn"> ADD</button>
         </form>
     </div>
 
@@ -27,28 +40,3 @@
 </body>
 
 </html>
-
-
-<?php
-include('database.php');
-
-
-echo "db is connected" . "<br>";
-
-
-
-if (isset($_POST['submit'])) {
-    if ($_POST['task'] != "") {
-        $task = $_POST['task'];
-
-        $addtasks = mysqli_query($conn, "INSERT INTO tasks (task) VALUES ('$task')");
-
-
-        echo "task added";
-    } else {
-        echo "something wrong, task is not adding";
-    }
-}
-
-mysqli_close($conn);
-?>
