@@ -37,11 +37,13 @@ echo "db is connected" . "<br>";
 
 
 
-if (isset($_POST['add'])) {
+if (isset($_POST['submit'])) {
     if ($_POST['task'] != "") {
         $task = $_POST['task'];
-        $sql = "INSERT INTO tasks (task) VALUES ('$task')";
-        mysqli_query($conn, $sql);
+
+        $addtasks = mysqli_query($conn, "INSERT INTO tasks (task) VALUES ('$task')");
+
+
         echo "task added";
     } else {
         echo "something wrong, task is not adding";
