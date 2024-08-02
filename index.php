@@ -7,6 +7,14 @@ if (isset($_POST['submit'])) {
     header('location:index.php');
 }
 
+$tasks = mysqli_query($db, "SELECT * FROM tasks");
+
+if (isset($_GET['del_task'])) {
+    $id = $_GET['del_task'];
+    mysqli_query($db, "DELETE FROM tasks WHERE id=$id");
+
+    header('location: index.php');
+}
 
 ?>
 
@@ -32,9 +40,11 @@ if (isset($_POST['submit'])) {
     </div>
 
     <ul id="myUL">
+        <?php while ($row = mysqli_fetch_array($tasks)) {  ?>
+            <li> <?php echo $row['Id']; ?></li>
+            <li><?php echo $row['task']; ?></li>
 
-        <li class="checked">Pay bills</li>
-
+        <?php } ?>
     </ul>
     <script src="script.js"></script>
 </body>
